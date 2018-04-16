@@ -1,0 +1,21 @@
+{
+  "name": "PDC-Careers-Server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/shdwskip/PDC-Careers-Server.git",
+  "author": "shdwskip <denev.pavel@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.14",
+    "morgan": "^1.9.0"
+  }
+}
