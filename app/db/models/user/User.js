@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-const connectionString = require('../../config').development.url;
+const connectionString = require('../../config');
 const {
   mailValidator,
 } = require('./validator');
@@ -36,6 +36,10 @@ const UserSchema = new Schema({
     job: {
       type: Schema.Types.ObjectId,
       ref: 'JobAd',
+    },
+    application: {
+      type: Schema.Types.ObjectId,
+      ref: 'JobApplication',
     },
   }],
   'createdAt': {

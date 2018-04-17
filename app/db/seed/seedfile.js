@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const {
     User,
     JobAd,
+    JobApplication,
+    Contact,
+    Button,
 } = require('../models');
 
 // ------------------------
@@ -61,8 +64,29 @@ const run = async () => {
         email: 'pavel_denev@test.com',
     }).exec();
 
-    user.appliedJobs.push(currentJobAd);
-    user.save();
+    // // user.appliedJobs.push(currentJobAd);
+    // // user.save();
+
+    // await JobApplication.create({
+    //     firstName: 'Pavel',
+    //     lastName: 'Denev',
+    //     comment: 'This is a test',
+    //     user: user.id,
+    //     job: currentJobAd.id,
+    //     email: 'pavel_denev@test.com',
+    //     CV: './assets/CVs/pavel_cv.pdf',
+    //     CoverLetter: './assets/CVs/pavel_coverletter.pdf'
+    // });
+    await JobApplication.findOne({firstName: 'Pavel'})
+    // .populate('job').exec(function (err, jobapp) {
+    //   if (err) return console.log('wrong');
+    //   console.log('The jobapp is', jobapp.job.title);
+    //   // prints "The author is Ian Fleming"
+    // })
+    .populate('user').exec(function (err, jobapp) {
+        if(err) return console.log('wrong');
+        console.log('User email is:', jobapp.user.email);
+    });
 };
 
 

@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const connectionString = require('../../config').development.url;
+const connectionString = require('../../config');
 
 if (mongoose.connection.readyState === 0) {
   mongoose.connect(connectionString);
 }
 
-// const CVSchema = new Schema({
-
-// });
 const JobAdSchema = new Schema({
   'title': {
     type: String,
@@ -36,6 +33,10 @@ const JobAdSchema = new Schema({
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+    },
+    application: {
+      type: Schema.Types.ObjectId,
+      ref: 'JobApplication',
     },
   }],
   'createdAt': {
