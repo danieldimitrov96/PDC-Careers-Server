@@ -56,13 +56,13 @@ const {
 // });
 
 const run = async () => {
-    const currentJobAd = await JobAd.findOne({
-        title: 'Test',
-    }).exec();
+    // const currentJobAd = await JobAd.findOne({
+    //     title: 'Test',
+    // }).exec();
 
-    const user = await User.findOne({
-        email: 'pavel_denev@test.com',
-    }).exec();
+    // const user = await User.findOne({
+    //     email: 'pavel_denev@test.com',
+    // }).exec();
 
     // // user.appliedJobs.push(currentJobAd);
     // // user.save();
@@ -77,16 +77,19 @@ const run = async () => {
     //     CV: './assets/CVs/pavel_cv.pdf',
     //     CoverLetter: './assets/CVs/pavel_coverletter.pdf'
     // });
-    await JobApplication.findOne({firstName: 'Pavel'})
+    // await JobApplication.findOne({firstName: 'Pavel'})
     // .populate('job').exec(function (err, jobapp) {
     //   if (err) return console.log('wrong');
     //   console.log('The jobapp is', jobapp.job.title);
     //   // prints "The author is Ian Fleming"
     // })
-    .populate('user').exec(function (err, jobapp) {
-        if(err) return console.log('wrong');
-        console.log('User email is:', jobapp.user.email);
-    });
+    // .populate('user').exec(function (err, jobapp) {
+    //     if(err) return console.log('wrong');
+    //     console.log('User email is:', jobapp.user.email);
+    // });
+
+    const allUsers = await User.find();
+    console.log(allUsers);
 };
 
 
