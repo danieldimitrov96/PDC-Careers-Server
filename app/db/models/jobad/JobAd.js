@@ -20,9 +20,8 @@ const JobAdSchema = new Schema({
     maxlength: 16384,
   },
   'category': {
-    type: String,
-    enum: ['IT', 'Marketing', 'Sales', 'Operations', 'Other'],
-    default: 'IT',
+    type: Schema.Types.ObjectId,
+    ref: 'JobCategory',
   },
   'status': {
     type: String,

@@ -12,6 +12,7 @@ const init = (app) => {
     }
 
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use('/static', express.static(path.join(__dirname, '../public')));
     app.use(morgan('combined'));
 };
 

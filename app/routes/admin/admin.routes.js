@@ -17,7 +17,12 @@ const init = (app, data) => {
             // }
         })
         .get('/users', async (req, res) => {
-            const context = await controller.getAllUsers();
+            const page = req.query.page;
+
+            if (!page) {
+                page = 0;
+            }
+            const context = await controller.getAllUsers(page);
             res.status(200).send(context);
         })
         .get('/jobs', async (req, res) => {
@@ -30,6 +35,8 @@ const init = (app, data) => {
         })
         .get('/buttons', async (req, res) => {
             // logic to get all buttons(links)
+            const context = await controller.getAllButtons();
+            res.status(200).send(context);
         })
         .get('/contacts', async (req, res) => {
             // logic to get all contacts
