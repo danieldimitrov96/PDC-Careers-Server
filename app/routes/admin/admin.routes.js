@@ -9,12 +9,13 @@ const init = (app, data) => {
     const controller = new Controller(data);
     router
         .get('/', async (req, res) => {
-            // if (req.user && req.user.isAdmin) {
-            //     const context = await controller.getAllUsers();
-            //     res.status(200).send(context);
-            // } else {
-            //     res.redirect('/');
-            // }
+            if (req.user && req.user.isAdmin) {
+                const context = await controller.getAllUsers();
+                res.status(200).send(context);
+            } else {
+                // const msg = { error: 'Not Found' };
+                res.status(404).send();
+            }
         })
         .get('/users', async (req, res) => {
             const page = req.query.page;

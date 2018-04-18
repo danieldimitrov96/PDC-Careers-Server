@@ -7,7 +7,7 @@ if (mongoose.connection.readyState === 0) {
 
 
 const JobCategorySchema = new Schema({
-  'name': {
+  'type': {
     type: String,
     required: true,
   },
