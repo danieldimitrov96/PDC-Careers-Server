@@ -23,18 +23,10 @@ class AdminController {
     }
 
     async getAllJobAds() {
-        let allJobs = await this.data.JobAd.getAll();
-        if (allJobs.length !== 0) {
-            allJobs = allJobs.map((job) => {
-                return {
-                    id: job._id,
-                    title: job.title,
-                    createdAt: job.createdAt,
-                };
-            });
-            return allJobs;
-        }
-        return null;
+        const allJobs = await this.data.JobAd.getAll();
+        return allJobs.map(
+            ({ _id, title, createdAt }) => ({ id: _id, title, createdAt })
+        );
     }
 
     async getAllButtons() {

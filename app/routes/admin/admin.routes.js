@@ -18,11 +18,7 @@ const init = (app, data) => {
             }
         })
         .get('/users', async (req, res) => {
-            const page = req.query.page;
-
-            if (!page) {
-                page = 0;
-            }
+            const { page = 0 } = req.query;
             const context = await controller.getAllUsers(page);
             res.status(200).send(context);
         })
@@ -42,6 +38,11 @@ const init = (app, data) => {
         .get('/contacts', async (req, res) => {
             const context = controller.getAllContacts();
             res.json(context);
+            // logic to get all contacts
+        })
+        .post('/jobs', async (req, res) => {
+            const content = req.body;
+            // TO DO: create method in controller that creates new job
         });
 
     app.use('/admin', router);

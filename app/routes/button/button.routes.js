@@ -2,8 +2,7 @@ const {
     Router,
 } = require('express');
 
-const Controller = require('./home.controller');
-
+const Controller = require('./button.controller');
 const init = (app, data) => {
     const router = new Router();
     const controller = new Controller(data);
@@ -14,7 +13,7 @@ const init = (app, data) => {
             // TO DO: get twitter/facebook from app.settings.json;
             res.status(200).send({ context, text });
         });
-    app.use('/', router);
+    app.use('/buttons', router);
 };
 
 module.exports = {

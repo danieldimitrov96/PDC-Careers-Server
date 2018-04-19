@@ -23,6 +23,10 @@ class CareersController {
         }
         return null;
     }
+
+    async getJobById(job) {
+        return await this.data.JobAd.getById(job);
+    }
 }
 
 module.exports = CareersController;

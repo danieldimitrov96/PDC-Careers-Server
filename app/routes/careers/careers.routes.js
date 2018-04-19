@@ -10,7 +10,12 @@ const init = (app, data) => {
     router
         .get('/', async (req, res) => {
             const context = await controller.getActiveJobsAndCategories();
-            res.status(200).send(context);
+            res.json(context);
+        })
+        .get('/:id', async (req, res) => {
+            const { id }= req.params;
+            const context = await controller.getJobById(id);
+            res.json(context);
         });
     app.use('/careers', router);
 };
