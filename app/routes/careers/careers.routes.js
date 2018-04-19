@@ -17,7 +17,7 @@ const init = (app, data) => {
             const context = await controller.getJobById(id);
             res.json(context);
         });
-    app.use('/careers', router);
+    app.use('/api/careers', router);
 };
 
 module.exports = {

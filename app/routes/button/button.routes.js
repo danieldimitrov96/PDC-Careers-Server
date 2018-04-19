@@ -13,7 +13,7 @@ const init = (app, data) => {
             // TO DO: get twitter/facebook from app.settings.json;
             res.status(200).send({ context, text });
         });
-    app.use('/buttons', router);
+    app.use('/api/buttons', router);
 };
 
 module.exports = {

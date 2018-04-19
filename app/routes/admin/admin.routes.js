@@ -45,7 +45,7 @@ const init = (app, data) => {
             // TO DO: create method in controller that creates new job
         });
 
-    app.use('/admin', router);
+    app.use('api/admin', router);
 };
 
 module.exports = {

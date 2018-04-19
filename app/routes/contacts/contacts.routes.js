@@ -18,7 +18,7 @@ const init = (app, data) => {
                 firstPrimary,
             });
         });
-    app.use('/contacts', router);
+    app.use('/api/contacts', router);
 };
 
 module.exports = {
