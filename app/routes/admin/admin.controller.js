@@ -7,16 +7,16 @@ class AdminController {
         let allUsers = await this.data.User.getAll();
         if (allUsers.length !== 0) {
             allUsers = allUsers
-            .sort((a, b) => b.createdAt - a.createdAt)
-            .map((user) => {
-                const totalApps = user.appliedJobs.length;
-                return {
-                    id: user._id,
-                    email: user.email,
-                    createdAt: user.createdAt,
-                    totalApplications: totalApps,
-                };
-            });
+                .sort((a, b) => b.createdAt - a.createdAt)
+                .map((user) => {
+                    const totalApps = user.appliedJobs.length;
+                    return {
+                        id: user._id,
+                        email: user.email,
+                        createdAt: user.createdAt,
+                        totalApplications: totalApps,
+                    };
+                });
             return allUsers;
         }
         return null;
@@ -39,6 +39,10 @@ class AdminController {
 
     async getAllButtons() {
         return await this.data.Button.getAll();
+    }
+
+    async getAllContacts() {
+        return await this.data.Contact.getAll();
     }
 }
 

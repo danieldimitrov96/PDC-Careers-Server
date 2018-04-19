@@ -40,9 +40,9 @@ const init = (app, data) => {
             res.status(200).send(context);
         })
         .get('/contacts', async (req, res) => {
-            // logic to get all contacts
+            const context = controller.getAllContacts();
+            res.json(context);
         });
-
 
     app.use('/admin', router);
 };
