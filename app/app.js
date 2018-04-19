@@ -1,8 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const data = require('./data');
 
 const config = require('./config');
 const app = express();
+
+const connectionString = require('./config').url;
+mongoose.connect(connectionString);
 
 require('./config/express').init(app);
 // require('./config/auth').init(app);

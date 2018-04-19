@@ -10,6 +10,10 @@ class Data {
     getById(id) {
         return this.Model.findById(id);
     }
+
+    create(obj) {
+        return this.Model.create(obj);
+    }
 }
 
 module.exports = Data;

@@ -16,6 +16,13 @@ const init = (app, data) => {
             const { id }= req.params;
             const context = await controller.getJobById(id);
             res.json(context);
+        })
+        .post('/:id', async (req, res) => {
+            const jobId = req.params.id;
+            const userId = req.user._id;
+            const userData = req.body;
+            // add user who applied for this job
+            await controller.createApplication(jobId, userId, userData);
         });
     app.use('/api/careers', router);
 };

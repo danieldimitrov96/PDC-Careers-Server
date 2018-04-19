@@ -2,7 +2,7 @@ class AdminController {
     constructor(data) {
         this.data = data;
     }
-
+    // TO DO: fix methods to work with pages
     async getAllUsers(page) {
         let allUsers = await this.data.User.getAll();
         if (allUsers.length !== 0) {

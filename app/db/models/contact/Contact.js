@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-if (mongoose.connection.readyState === 0) {
-  mongoose.connect(require('./connection-string'));
-}
-
 
 const ContactSchema = new Schema({
   'name': {

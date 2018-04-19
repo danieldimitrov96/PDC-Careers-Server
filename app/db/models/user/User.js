@@ -1,18 +1,13 @@
 // Change callbacks with async await
 // Check if password encryption can be setter
-// move mongoose.connect in index
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-const connectionString = require('../../config');
 const {
   mailValidator,
 } = require('./validator');
 
-if (mongoose.connection.readyState === 0) {
-  mongoose.connect(connectionString);
-}
 
 const SALT_FACTOR = 5;
 

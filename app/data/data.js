@@ -1,18 +1,18 @@
 const {
     User,
     JobCategory,
-    JobApplication,
 } = require('../db/models');
 
 const Data = require('./generic.data');
 const ButtonsData = require('./buttons.data');
 const JobAdsData = require('./jobads.data');
+const JobAppsData = require('./jobapps.data');
 const ContactsData = require('./contacts.data');
 
 module.exports = {
     User: new Data(User),
     JobAd: new JobAdsData(),
-    JobApplication: new Data(JobApplication),
+    JobApplication: new JobAppsData(),
     JobCategory: new Data(JobCategory),
     Contact: new ContactsData(),
     Button: new ButtonsData(),

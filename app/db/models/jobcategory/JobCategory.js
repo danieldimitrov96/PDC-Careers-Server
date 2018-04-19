@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const connectionString = require('../../config');
-if (mongoose.connection.readyState === 0) {
-  mongoose.connect(connectionString);
-}
-
 
 const JobCategorySchema = new Schema({
   'type': {
