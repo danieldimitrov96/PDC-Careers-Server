@@ -2,7 +2,7 @@
 // Check if password encryption can be setter
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 
 const {
   mailValidator,
@@ -61,7 +61,7 @@ UserSchema.pre('save', function (next) {
     if (err) {
       return next(err);
     }
-    bcrypt.hash(user.password, salt, false, function (err, hash) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       if (err) {
         return next(err);
       }
@@ -87,13 +87,10 @@ UserSchema.pre('findOneAndUpdate', function () {
   });
 });
 
-UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-    if (err) {
-      return cb(err);
-    }
-    cb(null, isMatch);
-  });
+UserSchema.methods.comparePassword = async function(passwordAttempt) {
+  const user = this;
+  const isMatch = bcrypt.compare(passwordAttempt, user.password);
+  return isMatch;
 };
 /* eslint-enable */
 module.exports = mongoose.model('User', UserSchema);

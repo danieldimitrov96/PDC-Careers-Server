@@ -9,9 +9,7 @@ const init = (app, data) => {
     router
         .get('/', async (req, res) => {
             const context = await controller.getActionSocialButtons();
-            const text = require('../../config/app.settings.json').text;
-            // TO DO: get twitter/facebook from app.settings.json;
-            res.status(200).send({ context, text });
+            res.status(200).send({ context });
         });
     app.use('/api/buttons', router);
 };
