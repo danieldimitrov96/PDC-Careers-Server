@@ -2,11 +2,11 @@
 
 const path = require('path');
 const express = require('express');
-// const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// const jwt = require('jsonwebtoken');
+const auth = require('./auth');
 
 const init = (app) => {
+    auth.init(app);
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static(path.join(__dirname, '../public')));

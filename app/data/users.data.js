@@ -9,7 +9,7 @@ class UsersData extends Data {
         super(User);
     }
 
-    async getByEmail(email) {
+    getByEmail(email) {
         return this.Model.findOne({ email });
     }
 }

@@ -9,15 +9,6 @@ const connectionString = config.URL;
 mongoose.connect(connectionString);
 
 require('./config/express').init(app);
-// require('./config/auth').setup(app);
-
-// const attachUserToRes = (req, res, next) => {
-//     res.locals.user = req.user || null;
-//     return next();
-// };
-
-// app.use(attachUserToRes);
-
 require('./routes').init(app, data);
 
 app.listen(config.PORT);

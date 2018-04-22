@@ -7,11 +7,15 @@ class AuthController {
     }
 
     async createUser(email, password) {
-        return this.data.User.create({
-            email,
-            password,
-            isAdmin: false,
-        });
+        try {
+            return await this.data.User.create({
+                email,
+                password,
+                isAdmin: false,
+            });
+        } catch (error) {
+            return 'Duplicate entries';
+        }
     }
 }
 

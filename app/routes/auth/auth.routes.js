@@ -3,9 +3,10 @@ const {
 } = require('express');
 const jwt = require('jsonwebtoken');
 
-const authConfig = require('../../config/auth');
+const authConfig = require('../../config');
+const secretOrKey = authConfig.JWT_SECRET;
+const expiresIn = authConfig.JWT_EXPIRE_TIME;
 const Controller = require('./auth.controller');
-const secretOrKey = authConfig.options.secretOrkey;
 
 const init = (app, data) => {
     const router = new Router();
@@ -19,7 +20,7 @@ const init = (app, data) => {
                 res.status(403).json({ message: 'Invalid email or password' });
             } else if ((await user.comparePassword(password))) {
                 const payload = { id: user._id };
-                const token = jwt.sign(payload, secretOrKey);
+                const token = jwt.sign(payload, secretOrKey, { expiresIn });
                 res.json({ message: 'ok', token, isAdmin: user.isAdmin });
             } else {
                 res.status(403).json({ message: 'Invalid email or password' });
@@ -36,7 +37,6 @@ const init = (app, data) => {
                     res.status(409).json({ message: 'User already exists' });
                 }
             } else {
-                console.log('we are in');
                 res.status(204).json({ message: 'No content' });
             }
         });

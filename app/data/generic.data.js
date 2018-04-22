@@ -11,12 +11,8 @@ class Data {
         return this.Model.findById(id);
     }
 
-    async create(obj) {
-        try {
-            return await this.Model.create(obj);
-        } catch (error) {
-            return 'Duplicate entries!';
-        }
+    create(obj) {
+        return this.Model.create(obj);
     }
 }
 

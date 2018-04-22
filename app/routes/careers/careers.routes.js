@@ -18,6 +18,7 @@ const init = (app, data) => {
             res.json(context);
         })
         .post('/:id', async (req, res) => {
+            // check if user is logged in
             const jobId = req.params.id;
             const userId = req.user._id;
             const userData = req.body;
