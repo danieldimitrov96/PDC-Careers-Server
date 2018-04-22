@@ -21,9 +21,9 @@ const init = (app, data) => {
             } else if ((await user.comparePassword(password))) {
                 const payload = { id: user._id };
                 const token = jwt.sign(payload, secretOrKey, { expiresIn });
-                res.json({ message: 'ok', token, isAdmin: user.isAdmin });
+                res.json({ token, expiresIn, isAdmin: user.isAdmin });
             } else {
-                res.status(403).json({ message: 'Invalid email or password' });
+                res.status(403).json({ message: '2Invalid email or password' });
             }
         })
         .post('/signup', async (req, res) => {

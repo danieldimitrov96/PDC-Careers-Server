@@ -7,7 +7,7 @@ const config = (function () {
     const PAGE_SIZE = 10;
     const JWT_SECRET = 'truesecret';
     const JWT_ISSUER = 'pdincorporated';
-    const JWT_EXPIRE_TIME = '2d';
+    const JWT_EXPIRE_TIME = 172800;
 
     if (env === 'development') {
         URL = 'mongodb://localhost/pdc';
