@@ -17,13 +17,17 @@ const init = (app, data) => {
             const { password } = req.body || null;
             const user = await controller.getUserByEmail(email);
             if (!user) {
-                res.status(403).json({ message: 'Invalid email or password' });
+                res.sendStatus(401);
             } else if ((await user.comparePassword(password))) {
-                const payload = { id: user._id };
+                const payload = {
+                    id: user._id,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                };
                 const token = jwt.sign(payload, secretOrKey, { expiresIn });
                 res.json({ token, expiresIn, isAdmin: user.isAdmin });
             } else {
-                res.status(403).json({ message: '2Invalid email or password' });
+                res.sendStatus(401);
             }
         })
         .post('/signup', async (req, res) => {
@@ -32,12 +36,18 @@ const init = (app, data) => {
             if (email && password) {
                 const newUser = await controller.createUser(email, password);
                 if (typeof newUser !== 'string') {
-                    res.status(200).json({ message: 'User created' });
+                    const payload = {
+                        id: newUser._id,
+                        email: newUser.email,
+                        isAdmin: newUser.isAdmin,
+                    };
+                    const token = jwt.sign(payload, secretOrKey, { expiresIn });
+                    res.json({ token, expiresIn, isAdmin: newUser.isAdmin });
                 } else {
-                    res.status(409).json({ message: 'User already exists' });
+                    res.status(302).send({ message: 'User already exist!' });
                 }
             } else {
-                res.status(204).json({ message: 'No content' });
+                res.json({ message: 'No content' });
             }
         });
     app.use('/api', router);
