@@ -10,7 +10,7 @@ const init = (app, data) => {
     router
         .get('/', async (req, res) => {
             const context = await controller.getActionSocialButtons();
-            res.status(200).send({ context });
+            res.json(context);
         });
     // .get('/test', passport.authenticate('jwt', {
     //     session: false

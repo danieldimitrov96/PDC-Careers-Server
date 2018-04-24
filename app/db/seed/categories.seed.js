@@ -1,5 +1,5 @@
 const seeder = require('mongoose-seed');
-const connectionString = require('../config');
+const connectionString = require('./../../config').URL;
 
 seeder.connect(connectionString, function () {
     seeder.loadModels([

@@ -1,5 +1,5 @@
 const seeder = require('mongoose-seed');
-const connectionString = require('../config');
+const connectionString = require('./../../config').URL;
 
 seeder.connect(connectionString, function () {
     seeder.loadModels([
@@ -23,8 +23,22 @@ const data = [{
             'hidden': false,
         },
         {
+            'name': 'Facebook',
+            'link': 'http://fb.com',
+            'icon': 'path/to/icon',
+            'type': 'Action',
+            'hidden': false,
+        },
+        {
             'name': 'LinkedIn',
             'link': 'http://linkedin.com',
+            'icon': 'path/to/icon',
+            'type': 'Social',
+            'hidden': false,
+        },
+        {
+            'name': 'Twitter',
+            'link': 'http://twitter.com',
             'icon': 'path/to/icon',
             'type': 'Social',
             'hidden': false,
