@@ -43,6 +43,15 @@ const init = (app, data) => {
         .post('/jobs', async (req, res) => {
             const content = req.body;
             // TO DO: create method in controller that creates new job
+        })
+        .post('buttons', async (req, res) => {
+            const content = req.body;
+            const newButton = await controller.createButton(content);
+            if (typeof newButton !== 'string') {
+                res.json(newButton);
+            } else {
+                res.sendStatus(302);
+            }
         });
 
     app.use('/api/admin', router);

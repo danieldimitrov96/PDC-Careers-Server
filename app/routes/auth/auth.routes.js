@@ -8,6 +8,9 @@ const secretOrKey = authConfig.JWT_SECRET;
 const expiresIn = authConfig.JWT_EXPIRE_TIME;
 const Controller = require('./auth.controller');
 
+
+// TO DO: create middleware to protect routes;
+
 const init = (app, data) => {
     const router = new Router();
     const controller = new Controller(data);

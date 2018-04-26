@@ -36,6 +36,14 @@ class AdminController {
     async getAllContacts() {
         return await this.data.Contact.getAll();
     }
+
+    async createButton(obj) {
+        try {
+            return await this.data.Button.create(obj);
+        } catch (error) {
+            return 'Duplicate!';
+        }
+    }
 }
 
 module.exports = AdminController;
