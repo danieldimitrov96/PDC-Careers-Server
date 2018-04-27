@@ -4,7 +4,7 @@ class CareersController {
     }
     // TO DO: fix to work with pages
     async getActiveJobsAndCategories() {
-        const [allJobs, allCategories] = await Promise.all([
+        const [allJobs, allCategoriesDb] = await Promise.all([
             this.data.JobAd.getAllActiveJobs(),
             this.data.JobCategory.getAll(),
         ]);
@@ -13,11 +13,25 @@ class CareersController {
             _id,
             title,
             description,
+            category,
             createdAt,
         }) => ({
             id: _id,
             title,
             description,
+            category,
+            createdAt,
+        })).sort((x, y) => x.createdAt > y.createdAt);
+
+        const allCategories = allCategoriesDb.map(({
+            _id,
+            type,
+            jobs,
+            createdAt,
+        }) => ({
+            id: _id,
+            type,
+            jobs,
             createdAt,
         }));
         return {

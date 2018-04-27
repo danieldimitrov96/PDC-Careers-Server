@@ -5,8 +5,9 @@ const JobCategorySchema = new Schema({
   'type': {
     type: String,
     required: true,
+    enum: ['IT', 'Sales', 'Marketing', 'Operations', 'Other'],
   },
-  'job': [
+  'jobs': [
     {
       job: {
         type: Schema.Types.ObjectId,
