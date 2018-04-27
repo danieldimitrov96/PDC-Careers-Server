@@ -60,6 +60,14 @@ class AdminController {
             return 'Error!';
         }
     }
+
+    async deleteButton(id) {
+        try {
+            return await this.data.Button.findByIdAndRemove(id);
+        } catch (error) {
+            return 'Error!';
+        }
+    }
 }
 
 module.exports = AdminController;

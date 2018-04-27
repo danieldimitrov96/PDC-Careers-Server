@@ -67,6 +67,17 @@ const init = (app, data) => {
             } else {
                 res.sendStatus(302);
             }
+        })
+        .post('/buttons/remove/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const removedButton = await controller.deleteButton(id);
+            if (removedButton !== 'Error!') {
+                res.json(removedButton);
+            } else {
+                res.sendStatus(302);
+            }
         });
 
     app.use('/api/admin', router);

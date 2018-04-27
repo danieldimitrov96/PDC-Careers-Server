@@ -18,6 +18,10 @@ class Data {
     findByIdAndUpdate(id, obj) {
         return this.Model.findByIdAndUpdate(id, obj);
     }
+
+    findByIdAndRemove(id) {
+        return this.Model.findByIdAndRemove(id);
+    }
 }
 
 module.exports = Data;
