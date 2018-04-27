@@ -44,7 +44,7 @@ const init = (app, data) => {
             const content = req.body;
             // TO DO: create method in controller that creates new job
         })
-        .post('buttons', async (req, res) => {
+        .post('/buttons', async (req, res) => {
             const content = req.body;
             const newButton = await controller.createButton(content);
             if (typeof newButton !== 'string') {
