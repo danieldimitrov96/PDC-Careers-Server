@@ -14,6 +14,10 @@ class Data {
     create(obj) {
         return this.Model.create(obj);
     }
+
+    findByIdAndUpdate(id, obj) {
+        return this.Model.findByIdAndUpdate(id, obj);
+    }
 }
 
 module.exports = Data;
