@@ -25,7 +25,15 @@ class AdminController {
     async getAllJobAds() {
         const allJobs = await this.data.JobAd.getAll();
         return allJobs.map(
-            ({ _id, title, createdAt }) => ({ id: _id, title, createdAt })
+            ({
+                _id,
+                title,
+                createdAt,
+            }) => ({
+                id: _id,
+                title,
+                createdAt,
+            })
         );
     }
 
@@ -42,6 +50,14 @@ class AdminController {
             return await this.data.Button.create(obj);
         } catch (error) {
             return 'Duplicate!';
+        }
+    }
+
+    async editButton(content, id) {
+        try {
+            return await this.data.Button.findByIdAndUpdate(id, content);
+        } catch (error) {
+            return 'Error!';
         }
     }
 }

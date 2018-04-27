@@ -18,7 +18,9 @@ const init = (app, data) => {
             }
         })
         .get('/users', async (req, res) => {
-            const { page = 0 } = req.query;
+            const {
+                page = 0,
+            } = req.query;
             const context = await controller.getAllUsers(page);
             res.status(200).send(context);
         })
@@ -44,11 +46,24 @@ const init = (app, data) => {
             const content = req.body;
             // TO DO: create method in controller that creates new job
         })
-        .post('buttons', async (req, res) => {
+        .post('/buttons', async (req, res) => {
             const content = req.body;
             const newButton = await controller.createButton(content);
-            if (typeof newButton !== 'string') {
+            if (newButton !== 'Duplicate!') {
                 res.json(newButton);
+            } else {
+                res.sendStatus(302);
+            }
+        })
+        .post('/buttons/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const content = req.body;
+            // console.log(id, content);
+            const editedButton = await controller.editButton(content, id);
+            if (editedButton !== 'Error!') {
+                res.json(editedButton);
             } else {
                 res.sendStatus(302);
             }
