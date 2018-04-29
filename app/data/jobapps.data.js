@@ -11,11 +11,11 @@ class JobAppsData extends Data {
     async createApplication(user, job, userData) {
         userData.user = user._id;
         userData.job = job._id;
-        console.log('USERDATA', userData);
+        // console.log('USERDATA', userData);
         // console.log('jobId', job._id);
-        console.log('JOB', job);
+        // console.log('JOB', job);
         const application = await this.Model.create(userData);
-        console.log('APPLICATION', application);
+        // console.log('APPLICATION', application);
         job.usersApplied.push({
             user,
             application,

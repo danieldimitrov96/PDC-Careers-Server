@@ -45,15 +45,15 @@ class CareersController {
     }
     // !!!!!!!!!MUST BE TESTED WITH CLIENT!!!!!!!!
     async createApplication(jobId, userId, userData) {
-        console.log('in controller');
-        console.log(userData);
+        // console.log('in controller');
+        // console.log(userData);
         const [user, job] =
         await Promise.all([this.data.User.getById(userId),
             this.data.JobAd.getById(jobId),
         ]);
-        console.log(user);
-        console.log('======================');
-        console.log(job);
+        // console.log(user);
+        // console.log('======================');
+        // console.log(job);
         return this.data.JobApplication.createApplication(user, job, userData);
     }
 }
