@@ -38,9 +38,42 @@ const init = (app, data) => {
             res.status(200).send(context);
         })
         .get('/contacts', async (req, res) => {
-            const context = controller.getAllContacts();
+            const context = await controller.getAllContacts();
             res.json(context);
             // logic to get all contacts
+        })
+        .post('/contacts', async (req, res) => {
+            const content = req.body;
+            const newButton = await controller.createContact(content);
+            if (newButton !== 'Duplicate!') {
+                res.json(newButton);
+            } else {
+                res.sendStatus(302);
+            }
+        })
+        .post('/contacts/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const content = req.body;
+            // console.log(id, content);
+            const editedContact = await controller.editContact(content, id);
+            if (editedContact !== 'Error!') {
+                res.json('Button is edited!');
+            } else {
+                res.sendStatus(302);
+            }
+        })
+        .post('/contacts/remove/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const removedContact = await controller.deleteContact(id);
+            if (removedContact !== 'Error!') {
+                res.json('Button is removed!');
+            } else {
+                res.sendStatus(302);
+            }
         })
         .post('/jobs', async (req, res) => {
             const content = req.body;
@@ -63,7 +96,7 @@ const init = (app, data) => {
             // console.log(id, content);
             const editedButton = await controller.editButton(content, id);
             if (editedButton !== 'Error!') {
-                res.json(editedButton);
+                res.json('Button is edited!');
             } else {
                 res.sendStatus(302);
             }
@@ -74,7 +107,7 @@ const init = (app, data) => {
             } = req.params;
             const removedButton = await controller.deleteButton(id);
             if (removedButton !== 'Error!') {
-                res.json(removedButton);
+                res.json('Button is removed!');
             } else {
                 res.sendStatus(302);
             }

@@ -68,6 +68,30 @@ class AdminController {
             return 'Error!';
         }
     }
+
+    async createContact(obj) {
+        try {
+            return await this.data.Contact.create(obj);
+        } catch (error) {
+            return 'Duplicate!';
+        }
+    }
+
+    async editContact(content, id) {
+        try {
+            return await this.data.Contact.findByIdAndUpdate(id, content);
+        } catch (error) {
+            return 'Error!';
+        }
+    }
+
+    async deleteContact(id) {
+        try {
+            return await this.data.Contact.findByIdAndRemove(id);
+        } catch (error) {
+            return 'Error!';
+        }
+    }
 }
 
 module.exports = AdminController;
