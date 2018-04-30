@@ -1,3 +1,6 @@
+/* globals __dirname */
+const path = require('path');
+
 class CareersController {
     constructor(data) {
         this.data = data;
@@ -43,18 +46,20 @@ class CareersController {
     async getJobById(jobId) {
         return await this.data.JobAd.getById(jobId);
     }
-    // !!!!!!!!!MUST BE TESTED WITH CLIENT!!!!!!!!
-    async createApplication(jobId, userId, userData) {
-        // console.log('in controller');
-        // console.log(userData);
+    async createApplication(jobId, userId, formData, cvFile, coverFile) {
+        const CV = path.join(__dirname, '..',
+            '..', '..', 'uploads', cvFile.filename);
+
+        const CoverLetter = path.join(__dirname, '..',
+            '..', '..', 'uploads', coverFile.filename);
+
+        formData.CV = CV;
+        formData.CoverLetter = CoverLetter;
         const [user, job] =
         await Promise.all([this.data.User.getById(userId),
             this.data.JobAd.getById(jobId),
         ]);
-        // console.log(user);
-        // console.log('======================');
-        // console.log(job);
-        return this.data.JobApplication.createApplication(user, job, userData);
+        return this.data.JobApplication.createApplication(user, job, formData);
     }
 }
 

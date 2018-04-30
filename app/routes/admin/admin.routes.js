@@ -18,10 +18,10 @@ const init = (app, data) => {
             }
         })
         .get('/users', async (req, res) => {
-            const {
-                page = 0,
-            } = req.query;
-            const context = await controller.getAllUsers(page);
+            // const {
+            //     page = 0,
+            // } = req.query;
+            const context = await controller.getAllUsers();
             res.status(200).send(context);
         })
         .get('/jobs', async (req, res) => {

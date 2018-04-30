@@ -28,11 +28,11 @@ const JobApplicationSchema = new Schema({
     ref: 'JobAd',
   },
   'CV': {
-    type: Schema.Types.Buffer,
+    type: String,
     required: true,
   },
   'CoverLetter': {
-    type: Schema.Types.Buffer,
+    type: String,
     required: true,
   },
   'createdAt': {

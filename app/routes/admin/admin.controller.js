@@ -3,7 +3,7 @@ class AdminController {
         this.data = data;
     }
     // TO DO: fix methods to work with pages
-    async getAllUsers(page) {
+    async getAllUsers() {
         let allUsers = await this.data.User.getAll();
         if (allUsers.length !== 0) {
             allUsers = allUsers

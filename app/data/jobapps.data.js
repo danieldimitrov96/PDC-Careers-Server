@@ -8,14 +8,10 @@ class JobAppsData extends Data {
         super(JobApplication);
     }
 
-    async createApplication(user, job, userData) {
-        userData.user = user._id;
-        userData.job = job._id;
-        // console.log('USERDATA', userData);
-        // console.log('jobId', job._id);
-        // console.log('JOB', job);
-        const application = await this.Model.create(userData);
-        // console.log('APPLICATION', application);
+    async createApplication(user, job, formData) {
+        formData.user = user._id;
+        formData.job = job._id;
+        const application = await this.Model.create(formData);
         job.usersApplied.push({
             user,
             application,
@@ -24,11 +20,9 @@ class JobAppsData extends Data {
             job,
             application,
         });
-
-        return Promise.all([
-            job.save(),
-            user.save(),
-        ]);
+        job.save();
+        user.save();
+        return application;
     }
 }
 
