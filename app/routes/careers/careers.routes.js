@@ -55,7 +55,7 @@ const init = (app, data) => {
             const newApplication =
                 await controller.createApplication(jobId, userId, formData,
                     cvFile, coverFile);
-            if (newApplication) {
+            if (newApplication !== 'User has already applied!') {
                 res.json(newApplication);
             } else {
                 res.sendStatus(403);

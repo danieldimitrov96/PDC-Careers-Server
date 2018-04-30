@@ -47,6 +47,7 @@ class CareersController {
         return await this.data.JobAd.getById(jobId);
     }
     async createApplication(jobId, userId, formData, cvFile, coverFile) {
+        let hasApplied = false;
         const CV = path.join(__dirname, '..',
             '..', '..', 'uploads', cvFile.filename);
 
@@ -59,6 +60,14 @@ class CareersController {
         await Promise.all([this.data.User.getById(userId),
             this.data.JobAd.getById(jobId),
         ]);
+        user.appliedJobs.forEach((application) => {
+            if (application.job.toString() === jobId) {
+                hasApplied = true;
+            }
+        });
+        if (hasApplied) {
+            return 'User has already applied!';
+        }
         return this.data.JobApplication.createApplication(user, job, formData);
     }
 }
