@@ -109,6 +109,30 @@ class AdminController {
             return 'Error!';
         }
     }
+
+    async editJob(id, content) {
+        try {
+            return await this.data.JobAd.findByIdAndUpdate(id, content);
+        } catch (err) {
+            return 'Error!';
+        }
+    }
+
+    async createJob(content) {
+        try {
+            return await this.data.JobAd.create(content);
+        } catch (err) {
+            return 'Duplicates!';
+        }
+    }
+
+    async deleteJob(id) {
+        try {
+            return await this.data.JobAd.findByIdAndRemove(id);
+        } catch (err) {
+            return 'Error!';
+        }
+    }
 }
 
 module.exports = AdminController;

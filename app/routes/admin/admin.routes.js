@@ -18,9 +18,6 @@ const init = (app, data) => {
             }
         })
         .get('/users', async (req, res) => {
-            // const {
-            //     page = 0,
-            // } = req.query;
             const context = await controller.getAllUsers();
             res.status(200).send(context);
         })
@@ -31,11 +28,12 @@ const init = (app, data) => {
         .get('/jobs', async (req, res) => {
             const context = await controller.getAllJobAds();
             res.json(context);
-            // logic to get all active and inactive job ads
         })
         .get('/jobs/:id', async (req, res) => {
-            const { id } = req.params;
-            if (id !== '1') {
+            const {
+                id,
+            } = req.params;
+            if (id !== 'create') {
                 const context = await controller.getJobById(id);
                 res.json(context);
             } else {
@@ -43,14 +41,12 @@ const init = (app, data) => {
             }
         })
         .get('/buttons', async (req, res) => {
-            // logic to get all buttons(links)
             const context = await controller.getAllButtons();
             res.status(200).send(context);
         })
         .get('/contacts', async (req, res) => {
             const context = await controller.getAllContacts();
             res.json(context);
-            // logic to get all contacts
         })
         .post('/contacts', async (req, res) => {
             const content = req.body;
@@ -66,7 +62,6 @@ const init = (app, data) => {
                 id,
             } = req.params;
             const content = req.body;
-            // console.log(id, content);
             const editedContact = await controller.editContact(content, id);
             if (editedContact !== 'Error!') {
                 res.json('Button is edited!');
@@ -85,9 +80,39 @@ const init = (app, data) => {
                 res.sendStatus(302);
             }
         })
-        .post('/jobs', async (req, res) => {
+        .post('/jobs/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
             const content = req.body;
-            // TO DO: create method in controller that creates new job
+            if (id !== 'create') {
+                const editedJob = await controller.editJob(id, content);
+                if (editedJob !== 'Error!') {
+                    res.json(editedJob);
+                } else {
+                    res.sendStatus(403);
+                }
+            } else {
+                const newJob = await controller.createJob(content);
+                if (newJob !== 'Duplicates!') {
+                    res.status(201).json(newJob);
+                } else {
+                    res.sendStatus(302);
+                }
+            }
+        })
+        .post('/jobs/remove/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const deletedJob = await controller.deleteJob(id);
+            if (deletedJob !== 'Error!') {
+                console.log('DELETED');
+                res.json(deletedJob);
+            } else {
+                console.log('ERROR!');
+                res.sendStatus(403);
+            }
         })
         .post('/buttons', async (req, res) => {
             const content = req.body;
@@ -103,7 +128,6 @@ const init = (app, data) => {
                 id,
             } = req.params;
             const content = req.body;
-            // console.log(id, content);
             const editedButton = await controller.editButton(content, id);
             if (editedButton !== 'Error!') {
                 res.json('Button is edited!');

@@ -5,6 +5,7 @@ const JobAdSchema = new Schema({
   'title': {
     type: String,
     required: true,
+    unique: true,
     minlength: 4,
     maxlength: 256,
   },
