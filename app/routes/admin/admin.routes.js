@@ -24,13 +24,23 @@ const init = (app, data) => {
             const context = await controller.getAllUsers();
             res.status(200).send(context);
         })
+        .get('/categories', async (req, res) => {
+            const context = await controller.getAllCategories();
+            res.json(context);
+        })
         .get('/jobs', async (req, res) => {
             const context = await controller.getAllJobAds();
-            res.status(200).send(context);
+            res.json(context);
             // logic to get all active and inactive job ads
         })
         .get('/jobs/:id', async (req, res) => {
-            // logic to get specific job by id
+            const { id } = req.params;
+            if (id !== '1') {
+                const context = await controller.getJobById(id);
+                res.json(context);
+            } else {
+                res.status(200);
+            }
         })
         .get('/buttons', async (req, res) => {
             // logic to get all buttons(links)

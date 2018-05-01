@@ -21,20 +21,37 @@ class AdminController {
         }
         return null;
     }
-
+    async getAllCategories() {
+        const allCategories = await this.data.JobCategory.getAll();
+        return allCategories.map(
+            ({
+                _id,
+                type,
+            }) => ({
+                id: _id,
+                type,
+            })
+        );
+    }
     async getAllJobAds() {
         const allJobs = await this.data.JobAd.getAll();
         return allJobs.map(
             ({
                 _id,
                 title,
+                status,
                 createdAt,
             }) => ({
                 id: _id,
                 title,
+                status,
                 createdAt,
             })
         );
+    }
+
+    async getJobById(id) {
+        return this.data.JobAd.getById(id);
     }
 
     async getAllButtons() {
