@@ -133,6 +133,13 @@ class AdminController {
             return 'Error!';
         }
     }
+    async findApplicationById(id) {
+        try {
+            return await this.data.JobApplication.getById(id);
+        } catch (error) {
+            return 'Error!';
+        }
+    }
 }
 
 module.exports = AdminController;

@@ -40,6 +40,25 @@ const init = (app, data) => {
                 res.status(200);
             }
         })
+        .get('/applications/:id', async (req, res) => {
+            const {
+                id,
+            } = req.params;
+            const context = await controller.findApplicationById(id);
+            // console.log(context);
+            res.json(context);
+        })
+        .get('/jobApplications/:jobId', async (req, res) => {
+            const {
+                jobId,
+            } = req.params;
+            const job = await controller.getJobById(jobId);
+            const context = (
+                await Promise.all(job.usersApplied.map((user) => {
+                return controller.findApplicationById(user.application);
+            })));
+            res.json(context);
+        })
         .get('/buttons', async (req, res) => {
             const context = await controller.getAllButtons();
             res.status(200).send(context);
