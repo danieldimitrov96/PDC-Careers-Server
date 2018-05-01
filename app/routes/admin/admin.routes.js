@@ -60,7 +60,7 @@ const init = (app, data) => {
             context.title = job.title;
             res.json({
                 context: context,
-                tittle: job.title,
+                title: job.title,
             });
         })
         .get('/buttons', async (req, res) => {
