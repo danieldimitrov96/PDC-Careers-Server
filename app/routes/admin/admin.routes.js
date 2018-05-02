@@ -1,6 +1,8 @@
+/* global __dirname */
 const {
     Router,
 } = require('express');
+const path = require('path');
 
 const Controller = require('./admin.controller');
 
@@ -40,19 +42,11 @@ const init = (app, data) => {
                 res.status(200);
             }
         })
-        .get('/applications/:id', async (req, res) => {
-            const {
-                id,
-            } = req.params;
-            const context = await controller.findApplicationById(id);
-            // console.log(context);
-            res.json(context);
-        })
         .get('/jobApplications/:jobId', async (req, res) => {
             const {
                 jobId,
             } = req.params;
-            const context = await controller.findApplicationByUserId(jobId);
+            const context = await controller.findApplicationByJobId(jobId);
             res.json(context);
         })
         .get('/buttons', async (req, res) => {
@@ -63,6 +57,12 @@ const init = (app, data) => {
             const context = await controller.getAllContacts();
             res.json(context);
         })
+        .get('/download/:fileName', async (req, res) => {
+            const file = req.params.fileName;
+            const filePath =
+                 path.join(__dirname, '..', '..', '..', 'uploads', file);
+            return res.download(filePath, file);
+          })
         .post('/contacts', async (req, res) => {
             const content = req.body;
             const newButton = await controller.createContact(content);

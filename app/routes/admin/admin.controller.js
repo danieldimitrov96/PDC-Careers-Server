@@ -133,7 +133,7 @@ class AdminController {
             return 'Error!';
         }
     }
-    async findApplicationByUserId(jobId) {
+    async findApplicationByJobId(jobId) {
         try {
             const job = await this.data.JobAd.getById(jobId);
             const context = (
