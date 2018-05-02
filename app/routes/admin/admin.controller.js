@@ -133,9 +133,17 @@ class AdminController {
             return 'Error!';
         }
     }
-    async findApplicationById(id) {
+    async findApplicationByUserId(jobId) {
         try {
-            return await this.data.JobApplication.getById(id);
+            const job = await this.data.JobAd.getById(jobId);
+            const context = (
+                await Promise.all(job.usersApplied.map((user) => {
+                    return this.data.JobApplication.getById(user.application);
+                })));
+            return {
+                context: context,
+                title: job.title,
+            };
         } catch (error) {
             return 'Error!';
         }

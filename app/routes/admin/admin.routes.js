@@ -52,16 +52,8 @@ const init = (app, data) => {
             const {
                 jobId,
             } = req.params;
-            const job = await controller.getJobById(jobId);
-            const context = (
-                await Promise.all(job.usersApplied.map((user) => {
-                    return controller.findApplicationById(user.application);
-                })));
-            context.title = job.title;
-            res.json({
-                context: context,
-                title: job.title,
-            });
+            const context = await controller.findApplicationByUserId(jobId);
+            res.json(context);
         })
         .get('/buttons', async (req, res) => {
             const context = await controller.getAllButtons();
