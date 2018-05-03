@@ -1,3 +1,5 @@
+const path = require('path');
+
 class AdminController {
     constructor(data) {
         this.data = data;
@@ -139,9 +141,27 @@ class AdminController {
             const context = (
                 await Promise.all(job.usersApplied.map((user) => {
                     return this.data.JobApplication.getById(user.application);
-                })));
+                })))
+                .map(({
+                    _id,
+                    firstName,
+                    lastName,
+                    comment,
+                    createdAt,
+                    CV,
+                    CoverLetter,
+                }) =>
+                ({
+                    _id,
+                    firstName,
+                    lastName,
+                    comment,
+                    createdAt,
+                    CV: path.basename(CV),
+                    CoverLetter: path.basename(CoverLetter),
+                }));
             return {
-                context: context,
+                context,
                 title: job.title,
             };
         } catch (error) {

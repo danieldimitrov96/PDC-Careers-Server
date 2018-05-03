@@ -122,10 +122,8 @@ const init = (app, data) => {
             } = req.params;
             const deletedJob = await controller.deleteJob(id);
             if (deletedJob !== 'Error!') {
-                console.log('DELETED');
                 res.json(deletedJob);
             } else {
-                console.log('ERROR!');
                 res.sendStatus(403);
             }
         })
