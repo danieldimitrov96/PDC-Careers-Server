@@ -5,42 +5,20 @@ class CareersController {
     constructor(data) {
         this.data = data;
     }
-    // TO DO: fix to work with pages
+    async getAllJobsAndCategories() {
+        const [allJobs, allCategoriesDb] = await Promise.all([
+            this.data.JobAd.getAll(),
+            this.data.JobCategory.getAll(),
+        ]);
+
+       return this._modifyJobsAndCategories(allJobs, allCategoriesDb);
+    }
     async getActiveJobsAndCategories() {
         const [allJobs, allCategoriesDb] = await Promise.all([
             this.data.JobAd.getAllActiveJobs(),
             this.data.JobCategory.getAll(),
         ]);
-
-        const allJobsAscending = allJobs.map(({
-            _id,
-            title,
-            description,
-            category,
-            createdAt,
-        }) => ({
-            id: _id,
-            title,
-            description,
-            category,
-            createdAt,
-        })).sort((x, y) => x.createdAt > y.createdAt);
-
-        const allCategories = allCategoriesDb.map(({
-            _id,
-            type,
-            jobs,
-            createdAt,
-        }) => ({
-            id: _id,
-            type,
-            jobs,
-            createdAt,
-        }));
-        return {
-            allJobsAscending,
-            allCategories,
-        };
+        return this._modifyJobsAndCategories(allJobs, allCategoriesDb);
     }
 
     async getJobById(jobId) {
@@ -69,6 +47,39 @@ class CareersController {
             return 'User has already applied!';
         }
         return this.data.JobApplication.createApplication(user, job, formData);
+    }
+
+    _modifyJobsAndCategories(allJobs, allCategoriesDb) {
+        const allJobsAscending = allJobs.map(({
+            _id,
+            title,
+            description,
+            category,
+            createdAt,
+        }) => ({
+            id: _id,
+            title,
+            description,
+            category,
+            createdAt,
+        })).sort((x, y) => x.createdAt > y.createdAt);
+
+        const allCategories = allCategoriesDb.map(({
+            _id,
+            type,
+            jobs,
+            createdAt,
+        }) => ({
+            id: _id,
+            type,
+            jobs,
+            createdAt,
+        }));
+
+        return {
+            allJobsAscending,
+            allCategories,
+        };
     }
 }
 

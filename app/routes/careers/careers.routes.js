@@ -2,6 +2,7 @@ const {
     Router,
 } = require('express');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
 const Controller = require('./careers.controller');
@@ -34,8 +35,22 @@ const init = (app, data) => {
     const controller = new Controller(data);
     router
         .get('/', async (req, res) => {
-            const context = await controller.getActiveJobsAndCategories();
-            res.json(context);
+            const bearer = req.headers.authorization;
+            if (bearer) {
+                const token = bearer.split(' ')[1];
+                const decoded = jwt.decode(token);
+                if (decoded.isAdmin) {
+                    const context = await controller.getAllJobsAndCategories();
+                    res.json(context);
+                } else {
+                    const context =
+                        await controller.getActiveJobsAndCategories();
+                    res.json(context);
+                }
+            } else {
+                const context = await controller.getActiveJobsAndCategories();
+                res.json(context);
+            }
         })
         .get('/:id', async (req, res) => {
             const {
