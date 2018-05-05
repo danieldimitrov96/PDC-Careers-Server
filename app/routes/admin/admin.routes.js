@@ -39,7 +39,11 @@ const init = (app, data) => {
                 const context = await controller.getJobById(id);
                 res.json(context);
             } else {
-                res.status(200);
+                res.json({
+                    title: '',
+                    description: '',
+
+                });
             }
         })
         .get('/jobApplications/:jobId', async (req, res) => {
@@ -60,9 +64,9 @@ const init = (app, data) => {
         .get('/download/:fileName', async (req, res) => {
             const file = req.params.fileName;
             const filePath =
-                 path.join(__dirname, '..', '..', '..', 'uploads', file);
+                path.join(__dirname, '..', '..', '..', 'uploads', file);
             return res.download(filePath, file);
-          })
+        })
         .post('/contacts', async (req, res) => {
             const content = req.body;
             const newButton = await controller.createContact(content);
