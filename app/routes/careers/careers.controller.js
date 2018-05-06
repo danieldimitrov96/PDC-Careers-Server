@@ -1,5 +1,6 @@
 /* globals __dirname */
 const path = require('path');
+const fs = require('fs');
 
 class CareersController {
     constructor(data) {
@@ -11,7 +12,7 @@ class CareersController {
             this.data.JobCategory.getAll(),
         ]);
 
-       return this._modifyJobsAndCategories(allJobs, allCategoriesDb);
+        return this._modifyJobsAndCategories(allJobs, allCategoriesDb);
     }
     async getActiveJobsAndCategories() {
         const [allJobs, allCategoriesDb] = await Promise.all([
@@ -28,12 +29,13 @@ class CareersController {
         let hasApplied = false;
         const CV = path.join(__dirname, '..',
             '..', '..', 'uploads', cvFile.filename);
-
-        const CoverLetter = path.join(__dirname, '..',
+        if (coverFile) {
+            const CoverLetter = path.join(__dirname, '..',
             '..', '..', 'uploads', coverFile.filename);
 
+            formData.CoverLetter = CoverLetter;
+        }
         formData.CV = CV;
-        formData.CoverLetter = CoverLetter;
         const [user, job] =
         await Promise.all([this.data.User.getById(userId),
             this.data.JobAd.getById(jobId),
@@ -44,6 +46,10 @@ class CareersController {
             }
         });
         if (hasApplied) {
+            fs.unlinkSync(CV);
+            if (formData.CoverLetter) {
+                fs.unlinkSync(formData.CoverLetter);
+            }
             return 'User has already applied!';
         }
         return this.data.JobApplication.createApplication(user, job, formData);

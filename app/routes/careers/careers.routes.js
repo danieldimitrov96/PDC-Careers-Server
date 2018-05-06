@@ -63,7 +63,10 @@ const init = (app, data) => {
             session: false,
         }), uploadFields, async (req, res) => {
             const cvFile = req.files.CV[0];
-            const coverFile = req.files.CoverLetter[0];
+            let coverFile = req.files.CoverLetter;
+            if (coverFile) {
+                coverFile = req.files.CoverLetter[0];
+            }
             const jobId = req.params.id;
             const userId = req.user._id;
             const formData = req.body;

@@ -33,7 +33,6 @@ const JobApplicationSchema = new Schema({
   },
   'CoverLetter': {
     type: String,
-    required: true,
   },
   'createdAt': {
     type: Date,
