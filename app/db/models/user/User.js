@@ -1,5 +1,3 @@
-// Change callbacks with async await
-// Check if password encryption can be setter
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');

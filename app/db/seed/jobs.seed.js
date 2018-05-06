@@ -97,7 +97,6 @@ const run = async () => {
             },
         ],
     }];
-    // console.log(data);
     seeder.connect(connectionString, function () {
         seeder.loadModels([
             'app/db//models/jobad/JobAd.js',

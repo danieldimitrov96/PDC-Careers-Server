@@ -25,5 +25,4 @@ const init = (app) => {
 };
 module.exports = {
     init,
-    // opts,
 };

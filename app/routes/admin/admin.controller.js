@@ -4,7 +4,6 @@ class AdminController {
     constructor(data) {
         this.data = data;
     }
-    // TO DO: fix methods to work with pages
     async getAllUsers() {
         let allUsers = await this.data.User.getAll();
         if (allUsers.length !== 0) {
@@ -135,7 +134,7 @@ class AdminController {
             return 'Error!';
         }
     }
-    
+
     async findApplicationByJobId(jobId) {
         try {
             const job = await this.data.JobAd.getById(jobId);
@@ -164,9 +163,8 @@ class AdminController {
                     CV: path.basename(CV),
                     CoverLetter: path.basename(CoverLetter),
                 }));
-                infoAboutApplication.forEach((application, index = 0)=>{
+                infoAboutApplication.forEach((application, index)=>{
                     infoAboutApplication[index].email = users[index].email;
-                    index++;
                 });
             return {
                 context: infoAboutApplication,
