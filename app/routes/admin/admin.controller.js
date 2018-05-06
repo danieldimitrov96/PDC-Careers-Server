@@ -135,10 +135,14 @@ class AdminController {
             return 'Error!';
         }
     }
+    
     async findApplicationByJobId(jobId) {
         try {
             const job = await this.data.JobAd.getById(jobId);
-            const context = (
+            const users = await Promise.all(job.usersApplied.map((user)=>{
+                return this.data.User.getById(user.user);
+            }));
+            const infoAboutApplication = (
                 await Promise.all(job.usersApplied.map((user) => {
                     return this.data.JobApplication.getById(user.application);
                 })))
@@ -160,8 +164,12 @@ class AdminController {
                     CV: path.basename(CV),
                     CoverLetter: path.basename(CoverLetter),
                 }));
+                infoAboutApplication.forEach((application, index = 0)=>{
+                    infoAboutApplication[index].email = users[index].email;
+                    index++;
+                });
             return {
-                context,
+                context: infoAboutApplication,
                 title: job.title,
             };
         } catch (error) {
