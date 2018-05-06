@@ -13,6 +13,15 @@ const init = (app, data) => {
     const router = new Router();
     const controller = new Controller(data);
     router
+        .get('/checkEmail/:email', async (req, res) => {
+            const { email } = req.params;
+            const user = await controller.getUserByEmail(email);
+            if (user) {
+                res.status(302).send('taken');
+            } else {
+                res.json('free');
+            }
+        })
         .post('/login', async (req, res) => {
             const { email } = req.body || null;
             const { password } = req.body || null;
