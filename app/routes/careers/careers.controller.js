@@ -1,5 +1,6 @@
 /* globals __dirname */
 const path = require('path');
+const fs = require('fs');
 
 class CareersController {
     constructor(data) {
@@ -45,6 +46,10 @@ class CareersController {
             }
         });
         if (hasApplied) {
+            fs.unlinkSync(CV);
+            if (formData.CoverLetter) {
+                fs.unlinkSync(formData.CoverLetter);
+            }
             return 'User has already applied!';
         }
         return this.data.JobApplication.createApplication(user, job, formData);
