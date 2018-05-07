@@ -27,6 +27,7 @@
     "passport-jwt": "^4.0.0"
   },
   "scripts": {
-    "start": "node ./app/app.js"
+    "start": "node ./app/app.js",
+    "seed": "node ./app/db/seed/buttons.seed.js && node ./app/db/seed/categories.seed.js && node ./app/db/seed/contacts.seed.js && node ./app/db/seed/users.seed.js && node ./app/db/seed/jobs.seed.js"
   }
 }

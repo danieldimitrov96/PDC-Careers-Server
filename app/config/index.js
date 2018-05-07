@@ -12,7 +12,7 @@ const config = (function () {
     if (env === 'development') {
         URL = 'mongodb://localhost/pdc';
     } else if (env === 'production') {
-        URL = 'mongodb://shdwskip:mnogoslojnaparola123@ds113936.mlab.com:13936/pdc';
+        URL = 'productionUrl';
     }
 
     return {

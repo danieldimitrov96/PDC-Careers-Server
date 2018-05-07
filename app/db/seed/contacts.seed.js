@@ -16,24 +16,24 @@ seeder.connect(connectionString, function () {
 const data = [{
     'model': 'Contact',
     'documents': [{
-        'name': 'gosho EOOD',
-        'address': 'pirotska SOFIA',
-        'isPrimary': false,
-    },
-    {
-        'name': 'tosho EOOD',
-        'address': 'SOFIA',
-        'isPrimary': false,
-    },
-    {
-        'name': 'pesho EOOD',
-        'address': 'sevastopol varna',
+        'name': 'HQ',
+        'address': 'Aleksandar Malinov 31, Sofia',
         'isPrimary': true,
     },
     {
-        'name': 'ivan EOOD',
-        'address': 'ndk SOFIA',
-        'isPrimary': true,
+        'name': 'Business Center',
+        'address': 'Boulevard Tsarigradsko Shose 90',
+        'isPrimary': false,
+    },
+    {
+        'name': 'Events Hall',
+        'address': 'NDK SOFIA',
+        'isPrimary': false,
+    },
+    {
+        'name': 'New York Sales',
+        'address': '5th Avenue, New York, USA',
+        'isPrimary': false,
     },
     ],
 }];

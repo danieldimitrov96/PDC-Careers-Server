@@ -12,13 +12,6 @@ const init = (app, data) => {
             const context = await controller.getActionSocialButtons();
             res.json(context);
         });
-    // .get('/test', passport.authenticate('jwt', {
-    //     session: false
-    // }), async (req, res) => {
-    //     res.json({
-    //         user: req.user,
-    //     });
-    // });
     app.use('/api/buttons', router);
 };
 
